@@ -8,7 +8,7 @@ from torchvision import transforms as T
 import PIL
 
 
-base_classes = ["airplane",
+class_names = ["airplane",
                 "car",
                 "bird",
                 "cat",
@@ -21,7 +21,7 @@ base_classes = ["airplane",
 
 classes_and_models = {
     "vgg11_bn": {
-        "classes": base_classes,
+        "classes": class_names,
         "model_name": ""
     },
 }
@@ -70,7 +70,12 @@ version: Optional[str]=None) -> Dict[str, Any]:
     if "error" in response:
         raise RuntimeError(response["error"])
 
-    return response["predictions"]
+    predictions = response["predictions"]
+    softmax = torch.nn.Softmax(dim=1)
+    predictions = softmax(predictions)
+    pred_class = torch.argmax(prediction, dim=1)
+
+    return predictions, pred_class
 
 
 def load_and_prep_image(filename, img_shape=32, rescale=True):
@@ -79,12 +84,14 @@ def load_and_prep_image(filename, img_shape=32, rescale=True):
     (32, 32, 3).
     """
     # define loader to resize and convert to shape [C,H,W]
-    torch_loader = T.Compose([T.Scale(img_shape), T.ToTensor()])
+    torch_loader = T.Compose([T.Resize(img_shape), T.ToTensor()])
     img = PIL.Image.open(filename)
-    img = loader(img).float()
+    img = torch_loader(img).float()
     assert img.shape[0] == 3  # checking image colour channels
     # Rescale the image (get all values between 0 and 1)
-    return img/255 if rescale else img
+    img = img/255 if rescale else img
+    # add batch size dimension
+    return img[None, :, :, :]
 
 
 def update_logger(image, model_used, pred_class, pred_conf, correct=False, user_label=None):
