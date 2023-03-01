@@ -2,3 +2,7 @@
 *.json
 state_dicts/
 data/
+*.jpg
+*.jpeg
+*.png
+__pycache__/

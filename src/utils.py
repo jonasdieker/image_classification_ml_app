@@ -8,8 +8,16 @@ from torchvision import transforms as T
 import PIL
 
 
-base_classes = ["airplane", "car", "bird", "cat", "deer", "dog", "frog", "horse",
-                "ship", "truck"]
+base_classes = ["airplane",
+                "car",
+                "bird",
+                "cat",
+                "deer",
+                "dog",
+                "frog",
+                "horse",
+                "ship",
+                "truck"]
 
 classes_and_models = {
     "vgg11_bn": {
@@ -18,12 +26,13 @@ classes_and_models = {
     },
 }
 
-def predict_json(project: str, region, model:str, instances: Dict[str, Any],
+def predict_json(project: str, region: str, model:str, instances: Dict[str, Any],
 version: Optional[str]=None) -> Dict[str, Any]:
     """Send json data to a deployed model for prediction.
     Args:
         project (str): project where the Cloud ML Engine Model is deployed.
         model (str): model name.
+        region (str): server region
         instances ([Mapping[str: Any]]): Keys should be the names of Tensors
             your deployed model expects as inputs. Values should be datatypes
             convertible to Tensors, or (potentially nested) lists of datatypes
