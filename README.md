@@ -1,4 +1,19 @@
-# Streamlit ML App
+# ML App for Classifying Images
+
+The model was training on CIFAR10 and thus only support the following classes:
+
+`
+["airplane",
+"car",
+"bird",
+"cat",
+"deer",
+"dog",
+"frog",
+"horse",
+"ship",
+"truck"]
+`
 
 You can download model weights, download the code, run docker-compose to build and run the backend and frontend with the following steps:
 
