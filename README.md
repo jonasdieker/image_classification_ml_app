@@ -4,7 +4,7 @@ You can download model weights, download the code, run docker-compose to build a
 
 ## Download model weights
 
-Place the image in a `state_dicts` folder under project root directory.
+Place the model weights in folder `image_classification_ml_app/state_dicts`.
 
 [Model weights](https://drive.google.com/file/d/1-ExlM56fxIL3cfIVpp-rckUXEAXBLt2j/view?usp=share_link) to Google drive for weights of simple VGG model trained on CIFAR10 dataset.
 
