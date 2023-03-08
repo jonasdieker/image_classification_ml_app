@@ -1,6 +1,6 @@
 # ML App for Classifying Images
 
-The model was training on CIFAR10 and thus only support the following classes:
+The model was training on CIFAR10 and thus only supports the following classes:
 
 `
 ["airplane",
