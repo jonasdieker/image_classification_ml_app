@@ -1,29 +1,23 @@
-"""
-Helper funcs and data for app
-"""
-
 import torch
 from torchvision import transforms as T
 
-from vgg import vgg11_bn
+from backend.vgg import vgg11_bn
 
-
-class_names = ["airplane",
-                "car",
-                "bird",
-                "cat",
-                "deer",
-                "dog",
-                "frog",
-                "horse",
-                "ship",
-                "truck"]
+class_names = [
+    "airplane",
+    "car",
+    "bird",
+    "cat",
+    "deer",
+    "dog",
+    "frog",
+    "horse",
+    "ship",
+    "truck",
+]
 
 classes_and_models = {
-    "vgg11_bn": {
-        "classes": class_names,
-        "model_name": ""
-    },
+    "vgg11_bn": {"classes": class_names, "model_name": ""},
 }
 
 
@@ -47,7 +41,7 @@ def load_and_prep_image(img, img_shape=32, rescale=True):
     img = torch_loader(img).float()
     assert img.shape[0] == 3  # checking image colour channels
     # Rescale the image (get all values between 0 and 1)
-    img = img/255 if rescale else img
+    img = img / 255 if rescale else img
     # add batch size dimension
     return img[None, :, :, :]
 
@@ -62,9 +56,11 @@ def get_prediction(image):
     return class_names[pred_class.item()], float(prediction[0, [pred_class.item()]])
 
 
-def update_logger(image, model_used, pred_class, pred_conf, correct=False, user_label=None):
+def update_logger(
+    image, model_used, pred_class, pred_conf, correct=False, user_label=None
+):
     """
-    Function for tracking feedback given in app, updates and reutrns 
+    Function for tracking feedback given in app, updates and reutrns
     logger dictionary.
     """
     logger = {
@@ -73,6 +69,6 @@ def update_logger(image, model_used, pred_class, pred_conf, correct=False, user_
         "pred_class": pred_class,
         "pred_conf": pred_conf,
         "correct": correct,
-        "user_label": user_label
-    }   
+        "user_label": user_label,
+    }
     return logger

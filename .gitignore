@@ -6,3 +6,4 @@ data/
 *.jpeg
 *.png
 __pycache__/
+!docker-compose.yaml

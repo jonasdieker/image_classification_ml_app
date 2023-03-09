@@ -13,4 +13,4 @@ COPY . /app
 WORKDIR /app
 
 # run
-ENTRYPOINT [ "python", "main.py" ]
+ENTRYPOINT [ "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080" ]

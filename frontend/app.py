@@ -1,9 +1,11 @@
-import streamlit as st
-import requests
 import json
 
+import requests
+import streamlit as st
 
-google_credentials = ""
+from backend.inference import class_names
+
+GOOGLE_CREDENTIALS = ""
 PROJECT = ""
 REGION = ""
 
@@ -25,6 +27,8 @@ def make_prediction(image):
 
 
 def main():
+    """main function for running streamlit frontend."""
+    
     st.title("First ML App")
     st.header("Classify what's in your photos!")
 
