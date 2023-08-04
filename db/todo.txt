@@ -1,0 +1,3 @@
+ - write dockerfile
+ - add db to docker-compose
+ - add feedback to form to app and store image + label in db
